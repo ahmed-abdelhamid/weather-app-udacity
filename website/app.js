@@ -4,15 +4,19 @@ const BASE_URL = "http://api.openweathermap.org/data/2.5/weather";
 
 // Create a new date instance dynamically with JS
 let d = new Date();
-let newDate = d.getMonth() + "." + d.getDate() + "." + d.getFullYear();
+let newDate = +d.getMonth() + 1 + "." + d.getDate() + "." + d.getFullYear();
 
 const updateUI = async () => {
   const repsonse = await fetch("/weather", { method: "GET" });
   try {
     const weather = await repsonse.json();
-    document.querySelector("#date").innerHTML = weather.date;
-    document.querySelector("#temp").innerHTML = weather.temp;
-    document.querySelector("#content").innerHTML = weather.userResponse;
+    document.querySelector("#date").innerHTML = `Date: ${weather.date}`;
+    document.querySelector(
+      "#temp"
+    ).innerHTML = `Temprature: ${weather.temp} Degrees`;
+    document.querySelector(
+      "#content"
+    ).innerHTML = `Your Feeling: ${weather.userResponse}`;
   } catch (e) {
     console.log(e);
   }
